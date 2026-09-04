@@ -32,9 +32,8 @@ def preprocess_m5(data_dir="../data"):
 
     # 3. Filtering to keep the project manageable on a standard laptop
     # The full dataset is 50M+ rows. We will sample 2 stores to demonstrate the logic.
-    print("Filtering data to CA_1 and TX_1 stores for performance...")
-    stores_to_keep = ['TX_1']
-    sales = sales[sales['store_id'].isin(stores_to_keep)].copy()
+    print("Filtering data to 1 store and 1 category for Streamlit Cloud memory limits...")
+    sales = sales[(sales['store_id'] == 'TX_1') & (sales['cat_id'] == 'HOBBIES')].copy()
     
     # 4. Melting the data (Wide to Long)
     print("Melting sales data from wide to long format...")
