@@ -33,7 +33,7 @@ def preprocess_m5(data_dir="../data"):
     # 3. Filtering to keep the project manageable on a standard laptop
     # The full dataset is 50M+ rows. We will sample 2 stores to demonstrate the logic.
     print("Filtering data to CA_1 and TX_1 stores for performance...")
-    stores_to_keep = ['CA_1', 'TX_1']
+    stores_to_keep = ['TX_1']
     sales = sales[sales['store_id'].isin(stores_to_keep)].copy()
     
     # 4. Melting the data (Wide to Long)
