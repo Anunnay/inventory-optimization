@@ -70,14 +70,14 @@ if page == "Executive Overview":
         st.subheader("Inventory Status Distribution")
         fig_status = px.pie(df_plan, names='action', hole=0.4, color='action',
                             color_discrete_map={'ORDER NOW': 'red', 'MONITOR': 'green', 'EXCESS': 'orange'})
-        st.plotly_chart(fig_status, use_container_width=True)
+        st.plotly_chart(fig_status, width='stretch')
         
     with colB:
         st.subheader("Estimated Inventory Value by Category")
         df_plan['inventory_value'] = df_plan['modeled_on_hand'] * df_plan['unit_cost_proxy']
         val_by_cat = df_plan.groupby('cat_id')['inventory_value'].sum().reset_index()
         fig_val = px.bar(val_by_cat, x='cat_id', y='inventory_value', text_auto='.2s')
-        st.plotly_chart(fig_val, use_container_width=True)
+        st.plotly_chart(fig_val, width='stretch')
 
 # --- Page 2: SKU / Store Analysis ---
 elif page == "SKU / Store Analysis":
@@ -116,7 +116,7 @@ elif page == "SKU / Store Analysis":
     fig_sim = px.line(sim_df, y=['on_hand', 'demand'], title="Modeled Inventory Behavior Based on Historical Demand")
     fig_sim.add_hline(y=sku_data['rop'], line_dash="dash", line_color="red", annotation_text="Reorder Point")
     fig_sim.add_hline(y=sku_data['safety_stock'], line_dash="dash", line_color="orange", annotation_text="Safety Stock")
-    st.plotly_chart(fig_sim, use_container_width=True)
+    st.plotly_chart(fig_sim, width='stretch')
 
 # --- Page 3: Replenishment Recommendations ---
 elif page == "Replenishment Recommendations":
@@ -133,7 +133,7 @@ elif page == "Replenishment Recommendations":
         color = 'red' if val == 'HIGH' else 'orange' if val == 'MEDIUM' else 'green'
         return f'color: {color}; font-weight: bold'
 
-    st.dataframe(view_df.style.map(style_risk, subset=['stockout_risk']), use_container_width=True)
+    st.dataframe(view_df.style.map(style_risk, subset=['stockout_risk']), width='stretch')
 
 # --- Page 4: What-If / Scenario Analysis ---
 elif page == "What-If / Scenario Analysis":
