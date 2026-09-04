@@ -1,0 +1,10 @@
+# Ignore raw datasets
+data/*.csv
+
+# (Removed data/*.parquet so the optimized files upload to GitHub!)
+
+# Ignore Python caches
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
